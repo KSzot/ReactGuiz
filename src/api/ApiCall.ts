@@ -1,5 +1,4 @@
-import { resolve } from 'dns';
-import { rejects } from 'assert';
+import { totalmem } from 'os';
 
 const API_CATEGORY_URL = 'https://opentdb.com/api_category.php';
 
@@ -16,4 +15,12 @@ export const fetchQuizCategory = () => {
       })
       .catch((error) => error.then((body: any) => rejects(body)));
   });
+};
+
+export const fetchQuizCategoryTmp = async () => {
+  const response = await fetch(API_CATEGORY_URL);
+  const data = await response.json();
+  const tmp = await data;
+  console.log(tmp.trivia_categories);
+  return tmp.trivia_categories;
 };
